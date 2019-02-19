@@ -90,15 +90,25 @@ public class TestTools {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
         out.println("[ " + df.format(new Date(time)) + "]");
     }
-
+    
     public static long loopExecute(LoopExecute exe) throws Exception {
+        return loopExecute(exe, null);
+    }
+
+    /**
+     * 执行循环测试
+     * 
+     * @param name 测试方法名称
+     */
+    public static long loopExecute(LoopExecute exe, String name) throws Exception {
         int n = exe.getLoopTimes();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < n; i++) {
             exe.execute();
         }
         long t2 = System.currentTimeMillis() - t1;
-        out.println("[" + exe.getClass().getName() + "] executed cost " + t2 + " ms. ( " + (double) t2 / n + " ms/n)");
+        out.println("[" + (name != null ? name
+                : exe.getClass().getName()) + "] executed cost " + t2 + " ms. ( " + (double) t2 / n + " ms/n)");
         return t2;
     }
 
