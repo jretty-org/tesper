@@ -16,13 +16,21 @@ package org.jretty.tesper;
  * @author zollty 
  * @since 2013-12-2
  */
-public interface LoopExecute {
+public abstract class LoopExecute {
+    
+    private int loopTimes;
+    
+    public LoopExecute() {}
+    
+    public LoopExecute(int loopTimes) {
+        this.loopTimes = loopTimes;
+    }
 	
-	public void execute() throws Exception;
+	public abstract void execute() throws Exception;
 	
 	/**
 	 * 循环的次数
 	 */
-	public int getLoopTimes();
+	public int getLoopTimes() {return loopTimes;};
 	
 }

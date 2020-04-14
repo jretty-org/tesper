@@ -34,7 +34,7 @@ public class TestTools {
     };
 
     /**
-     * 模拟一个很耗时的CPU操作，可以和Thread.slop()相比，但是作用不一样。
+     * 模拟一个很耗时的CPU操作，可以和Thread.sleep()相比，但是作用不一样。
      * 
      * @param level (10,100)区间，推荐参考的level： <br>
      *            当level = 26, 53时，对应的耗时大概为：8秒、60秒
@@ -91,7 +91,7 @@ public class TestTools {
         out.println("[ " + df.format(new Date(time)) + "]");
     }
     
-    public static long loopExecute(LoopExecute exe) throws Exception {
+    public static long loopExecute(LoopExecute exe) {
         return loopExecute(exe, null);
     }
 
@@ -100,11 +100,15 @@ public class TestTools {
      * 
      * @param name 测试方法名称
      */
-    public static long loopExecute(LoopExecute exe, String name) throws Exception {
+    public static long loopExecute(LoopExecute exe, String name) {
         int n = exe.getLoopTimes();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < n; i++) {
-            exe.execute();
+            try {
+                exe.execute();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         long t2 = System.currentTimeMillis() - t1;
         out.println("[" + (name != null ? name

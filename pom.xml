@@ -22,7 +22,7 @@
   </parent>
   <artifactId>tesper</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>tesper</name>
   <description>Test helper lib. See the parent pom for more infomation.</description>
   
